@@ -1,0 +1,35 @@
+body {
+  background: #0b0f0c;
+  color: #c8ffcf;
+  font-family: "Courier New", monospace;
+  max-width: 40em;
+  margin: 4em auto;
+  padding: 0 1em;
+  line-height: 1.5;
+}
+
+#story p {
+  white-space: pre-wrap;
+}
+
+#choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-top: 1.5em;
+}
+
+#choices button {
+  background: none;
+  border: 1px solid #4a7a52;
+  color: #c8ffcf;
+  font-family: inherit;
+  font-size: 1em;
+  text-align: left;
+  padding: 0.6em 0.8em;
+  cursor: pointer;
+}
+
+#choices button:hover {
+  background: #142418;
+}
