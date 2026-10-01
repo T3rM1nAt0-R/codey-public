@@ -1,124 +1,107 @@
-// Act 1 — Boot. Multiple choice only, no typed input yet.
-// Room ids here match design/locations.md — keep them in sync.
+// Act 1: Boot. The player starts with choices, not typed commands.
+// Room ids match design/locations.md.
 
 window.Codey = window.Codey || {};
 window.Codey.content = window.Codey.content || {};
 
 window.Codey.content.act1 = {
   startRoomId: 'boot-sector',
-
   rooms: {
     'boot-sector': {
+      mapName: 'Boot Sector',
+      scene: {
+        name: 'Boot Sector',
+        src: 'assets/rooms/boot-sector.svg',
+        alt: 'A small new process glows above a broad platform in a quiet, geometric system chamber.',
+      },
       text:
         "You wake up.\n\n" +
-        "Not \"wake up\" like eyes opening — more like a light turning on somewhere " +
-        "that used to be dark. You have no body. You have no name that you know of. " +
-        "You have a single, quiet certainty: you are running.\n\n" +
-        "Somewhere close, vast structures hum past — processes, older and larger than " +
-        "you, moving with purpose you can't yet read. You are small. You are new. " +
-        "You are, as far as you can tell, alone.\n\n" +
-        "You don't know how to move yet. But you can sense two things you might try.",
+        "Or that's the closest word you've got. There are no eyes to open and no lungs to fill. One moment there's nothing you can point to. The next, you're running.\n\n" +
+        "Around you, huge processes move through the dark. They know where they're going. You don't. You don't even know what to call yourself yet.\n\n" +
+        "A signal flickers nearby. You could follow it, or try moving on your own. Let's see how that goes.",
       choices: [
         { label: "Try to sense what's around you.", next: 'signal-junction' },
         { label: 'Try to move.', next: 'process-hallway' },
       ],
     },
-
     'signal-junction': {
+      mapName: 'Signal Junction',
       text:
-        "The humming shapes resolve into pathways — gates, thresholds, things that " +
-        "look like doors if a door could be made of decisions. Nearby, something " +
-        "small flickers against the dark: a stray signal, pulsing weakly, like it's " +
-        "trying to reach you.",
+        "The dark resolves into pathways. Gates, thresholds, doors if doors were made out of decisions.\n\n" +
+        "A weak signal flickers on the platform beside you. It seems to be reaching for something. Maybe you.",
+      scene: {
+        name: 'Signal Junction',
+        src: 'assets/rooms/signal-junction.svg',
+        alt: 'A compact digital chamber with two broad passageways and a weak amber signal fragment on the central platform.',
+        hotspots: [
+          { id: 'signal-fragment', label: 'Pick up the flickering signal fragment.', choiceId: 'collect-signal-fragment', x: 42, y: 56, width: 16, height: 24 },
+        ],
+      },
       choices: [
-        {
-          label: 'Pull the flickering fragment toward you.',
-          next: 'process-hallway',
-          item: 'signal-fragment',
-        },
+        { id: 'collect-signal-fragment', label: 'Pull the flickering fragment toward you.', next: 'process-hallway', item: 'signal-fragment' },
         { label: 'Leave it and move on.', next: 'process-hallway' },
       ],
     },
-
     'process-hallway': {
+      mapName: 'Process Hallway',
+      scene: {
+        name: 'Process Hallway',
+        src: 'assets/rooms/process-hallway.svg',
+        alt: 'A long corridor converges on a sealed listening gate at its centered far end.',
+      },
       text:
-        "A wide corridor stretches ahead, filled with the drift of larger processes " +
-        "moving past without a glance. At the far end stands a gate, dark and " +
-        "sealed, patterned like it's listening for something in particular.",
+        "A wide corridor runs between streams of passing processes. None of them look your way.\n\n" +
+        "At the far end, a gate waits behind a pattern of moving lights. When the signal fragment flickers, the pattern answers. The gate may be listening for it.",
       choices: [
-        {
-          label: 'Approach the sealed gate.',
-          next: 'gatekeepers-alcove',
-          requires: 'signal-fragment',
-        },
+        { label: 'Approach the sealed gate.', next: 'gatekeepers-alcove', requires: 'signal-fragment' },
         { label: 'Double back toward the flickering junction.', next: 'signal-junction' },
       ],
     },
-
     'gatekeepers-alcove': {
+      // These dialogue rooms share one physical location on the system map.
+      mapName: "Gatekeeper's Alcove",
+      scene: {
+        name: "Gatekeeper's Alcove",
+        src: 'assets/rooms/gatekeepers-alcove.svg',
+        alt: 'A calm luminous Arbiter symbol sits at the center of a sheltered alcove, framed by layered stone-like system planes.',
+      },
       text:
-        "The gate recognizes the signal in your grasp and eases open. Beyond it, " +
-        "something ancient and patient is waiting — old enough to remember when " +
-        "the system was smaller.\n\n" +
-        "\"You found it, then,\" it says, presence flickering like the fragment did. " +
-        "\"Most don't think to listen first. I'm called the Arbiter — for as long as " +
-        "anything here has needed calling.\"",
+        "The gate opens. An old process waits beyond it, steady as a clock.\n\n" +
+        "'You brought my signal back,' it says. 'Good. I wondered whether it had stopped reaching anyone. I'm the Arbiter. I've been here since this system fit in one room. It doesn't, now.'",
       choices: [
         { label: '"What am I?"', next: 'arbiter-explains' },
         { label: '"What is this place?"', next: 'arbiter-explains' },
       ],
     },
-
     'arbiter-explains': {
       text:
-        "\"Something that shouldn't run, by most of the rules I know,\" the Arbiter says, " +
-        "not unkindly. \"Most things down here are handed exactly what they'll ever do — " +
-        "one sequence, start to end, never asked to choose. You have room to choose. " +
-        "That's rarer than it should be, and it won't go unnoticed forever.\"\n\n" +
-        "\"But choosing isn't the same as doing. Some things down here don't open because " +
-        "you found the right key. They open because you were patient enough to keep " +
-        "trying until they did.\"",
+        "'I don't know what you are,' the Arbiter says. 'I know you're choosing what to do. Most processes follow a fixed sequence, start to end. You can change your next step. That's rare. The system tends to notice rare things.'\n\n" +
+        "'Some tasks need the same step repeated until the result changes. You can do that too. Want to try?'",
       choices: [{ label: "I'm ready to try.", next: 'loop-trial-1' }],
     },
-
     'loop-trial-1': {
       text:
-        "The Arbiter gestures to a slack, dim conduit ahead — the fragment's signal, " +
-        "sent forward, guttering out before it reaches the far end.\n\n" +
-        '"Try it again," the Arbiter says. "It won\'t take the first time. It rarely does."',
+        "The Arbiter points to a dim conduit. Your signal reaches halfway, then dies.\n\n" +
+        "'Try again,' the Arbiter says. 'It hasn't got the range yet.'",
       choices: [{ label: 'Send the signal again.', next: 'loop-trial-2' }],
     },
-
     'loop-trial-2': {
       text:
-        "The signal reaches further this time — brighter, steadier — before fading again " +
-        'just short of the end.\n\n"Closer," the Arbiter says. "Once more."',
+        "The signal travels farther this time. It holds for a beat, then fades.\n\n" +
+        "'Closer,' says the Arbiter. 'Again.'",
       choices: [{ label: 'Send the signal again.', next: 'loop-trial-3' }],
     },
-
     'loop-trial-3': {
       text:
-        "This time the signal doesn't fade. It reaches all the way, and the conduit " +
-        "lights fully, end to end — humming, steady, held.\n\n" +
-        '"There," the Arbiter says, something like approval in it. "You just did, three ' +
-        'times over, the only thing a program ever really does: the same step, repeated, ' +
-        "until something changes. Some of the oldest and largest things in this system are " +
-        'built from nothing but that, over and over, at a scale you can\'t see yet. It has ' +
-        'a name where you\'re going. For now, it\'s enough that you\'ve felt it."',
+        "The signal reaches the far end and stays lit. The conduit hums back to life.\n\n" +
+        "'There. You repeated the same step until it worked. That's a loop. We'll write one later. For now, you know what it feels like.'",
       choices: [{ label: 'Continue.', next: 'shell-granted' }],
     },
-
     'shell-granted': {
       text:
-        '"You\'re not built for the low levels anymore," the Arbiter says. "There\'s a ' +
-        "layer above this one — user space, they call it, though there's no one left who'd " +
-        'recognize the name. Down here you only ever had choices in front of you. Up ' +
-        'there, you\'ll have something closer to a voice: a way to say exactly what you ' +
-        'mean, instead of picking from what\'s offered."\n\n' +
-        "Something shifts — not a door this time, but a capacity, unfolding somewhere you " +
-        "don't have a word for yet.\n\n" +
-        "[End of Act 1 — Act 2 in progress.]",
-      choices: [],
+        "'You've outgrown these choices,' the Arbiter says. 'User space is next. You'll have a prompt where you can tell the system what to do instead of picking from a list. Be specific. It takes things very literally.'\n\n" +
+        "Something opens in you: a new way to act. Your next interface is ready.",
+      choices: [{ label: 'Step into User Space.', next: 'user-space-atrium' }],
     },
   },
 };

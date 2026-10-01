@@ -1,0 +1,69 @@
+/* Scoped scene-stage styles; layout below the stage belongs to the game shell. */
+.room-stage {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  width: min(100%, 110svh);
+  aspect-ratio: 16 / 9;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  isolation: isolate;
+  margin: 0 auto 1em;
+  background: #101923;
+}
+
+.room-stage__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.room-hotspot {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 2px solid rgba(242, 184, 75, 0.9);
+  border-radius: 50%;
+  background: rgba(242, 184, 75, 0.12);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.room-hotspot::after {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #f2b84b;
+  border-radius: 50%;
+  background: #101923;
+  content: "";
+}
+
+.room-hotspot:hover {
+  background: rgba(242, 184, 75, 0.28);
+}
+
+.room-hotspot:focus-visible {
+  outline: 3px solid #f1f4f5;
+  outline-offset: 3px;
+  background: rgba(242, 184, 75, 0.36);
+}
+
+@media (max-width: 640px) {
+  .room-stage {
+    width: 100%;
+    height: min(45svh, 34rem);
+    aspect-ratio: auto;
+  }
+  .room-hotspot { min-width: 44px; min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .room-hotspot { transition: none; }
+}

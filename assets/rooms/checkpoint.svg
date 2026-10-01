@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Checkpoint</title>
+<desc id="desc">The corridor reaches a clear central checkpoint arch with a stable green status marker.</desc>
+<rect width="1280" height="720" fill="#101923"/>
+<path d="M0 72H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+<path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+<path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+<path d="M104 720 550 502M1176 720 730 502M340 720 600 506M940 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+<path d="M0 150H160M1120 150H1280M0 188H120M1160 188H1280" stroke="#728896" stroke-width="4" opacity=".7"/>
+<path d="M500 480V270Q500 208 560 208H720Q780 208 780 270V480H728V274Q728 260 712 260H568Q552 260 552 274V480Z" fill="#26394A" stroke="#728896" stroke-width="6"/><path d="M590 288H690V392H590Z" fill="#101923" stroke="#63D5C8" stroke-width="6"/><circle cx="640" cy="340" r="22" fill="#63D5C8"/><path d="M628 340 638 350 655 328" fill="none" stroke="#101923" stroke-width="7"/><path d="M540 480H740L780 516H500Z" fill="#344B5A" stroke="#728896" stroke-width="5"/>
+</svg>

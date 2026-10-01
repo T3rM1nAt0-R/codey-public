@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Locked Archive</title>
+<desc id="desc">Two record shelves flank a central archive console displaying the three-step sequence STAGE, VERIFY, COMMIT.</desc>
+<rect width="1280" height="720" fill="#101923"/>
+<path d="M0 72H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+<path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+<path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+<path d="M104 720 550 502M1176 720 730 502M340 720 600 506M940 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+<path d="M0 150H160M1120 150H1280M0 188H120M1160 188H1280" stroke="#728896" stroke-width="4" opacity=".7"/>
+<path d="M438 330H552V454H438ZM728 330H842V454H728Z" fill="#26394A" stroke="#728896" stroke-width="5"/><path d="M456 350H534V374H456ZM456 392H534V416H456ZM746 350H824V374H746ZM746 392H824V416H746Z" fill="#496372"/><path d="M548 276H732V454H548Z" fill="#101923" stroke="#63D5C8" stroke-width="6"/><path d="M568 296H712V432H568Z" fill="#26394A"/><text x="640" y="334" text-anchor="middle" fill="#F1F4F5" font-size="24" font-family="system-ui,sans-serif">STAGE</text><text x="640" y="372" text-anchor="middle" fill="#F1F4F5" font-size="24" font-family="system-ui,sans-serif">VERIFY</text><text x="640" y="410" text-anchor="middle" fill="#F2B84B" font-size="24" font-family="system-ui,sans-serif">COMMIT</text><path d="M520 454H760L790 500H490Z" fill="#344B5A" stroke="#728896" stroke-width="5"/>
+</svg>

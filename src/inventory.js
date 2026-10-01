@@ -2,6 +2,12 @@
 // No quantities, no combining — see design/items.md for why that's
 // deliberate, not a placeholder for something bigger.
 //
+// These functions don't actually know anything about "items" - they just
+// operate on whatever array of ids you pass in. So when the engine later
+// needs a second yes/no set for story flags (has this happened yet, not
+// what's carried), it reuses this same module on state.flags instead of
+// writing a near-identical one. Same shape underneath, one tool, twice.
+//
 // Plain scripts, not ES modules: modules would let us use import/export
 // and skip the shared namespace below, but browsers block module loading
 // when a page is opened directly from disk (file://) instead of through

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Open Channel</title>
+<desc id="desc">The central route through the security frame is now open, with the scanning beam redirected toward the far wall.</desc>
+<rect width="1280" height="720" fill="#101923"/>
+<path d="M0 72H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+<path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+<path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+<path d="M104 720 550 502M1176 720 730 502M340 720 600 506M940 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+<path d="M0 150H160M1120 150H1280M0 188H120M1160 188H1280" stroke="#728896" stroke-width="4" opacity=".7"/>
+<path d="M500 228V450M780 228V450M500 228H780" stroke="#728896" stroke-width="18"/><path d="M540 246 748 286 736 324 528 284Z" fill="#63D5C8" opacity=".28"/><path d="M540 246 748 286" stroke="#63D5C8" stroke-width="6"/><path d="M580 448H700L756 502H524Z" fill="#26394A" stroke="#728896" stroke-width="5"/><path d="M628 448V376M640 448V376M652 448V376" stroke="#F2B84B" stroke-width="5"/><path d="M600 360H680" stroke="#A8B8C0" stroke-width="5"/>
+</svg>

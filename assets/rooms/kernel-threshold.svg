@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Kernel Threshold room comp</title>
+  <desc id="desc">A broad system chamber with a large rectangular threshold, layered floor and teal access marker.</desc>
+  <rect width="1280" height="720" fill="#101923"/>
+  <path d="M0 76H1280V444L640 500 0 444Z" fill="#1B2A3A"/>
+  <path d="M0 444 640 500 1280 444V720H0Z" fill="#344B5A"/>
+  <path d="M345 165H935V414H345Z" fill="#26394A" stroke="#728896" stroke-width="7"/>
+  <path d="M392 208H888V414H392Z" fill="#101923"/>
+  <path d="M435 250H845V414H435Z" fill="#1B2A3A"/>
+  <path d="M480 295H800V414H480Z" fill="#26394A"/>
+  <path d="M345 414 392 438H888L935 414" fill="none" stroke="#A8B8C0" stroke-width="5"/>
+  <path d="M0 535 640 605 1280 535M170 720 560 609M1110 720 720 609" fill="none" stroke="#496372" stroke-width="4"/>
+  <path d="M150 306H282V444H150ZM998 306H1130V444H998Z" fill="#26394A"/>
+  <path d="M150 306H282M998 306H1130" stroke="#728896" stroke-width="5"/>
+  <ellipse cx="640" cy="563" rx="29" ry="9" fill="#101923" opacity=".55"/>
+  <rect x="625" y="523" width="30" height="30" rx="4" fill="#63D5C8"/>
+  <path d="M640 522V490" stroke="#63D5C8" stroke-width="4"/>
+  <rect x="575" y="442" width="130" height="15" rx="7" fill="#63D5C8" opacity=".75"/>
+</svg>

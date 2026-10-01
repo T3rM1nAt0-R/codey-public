@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Boot Sector room comp</title>
+  <desc id="desc">A clean geometric digital chamber with a central platform and process marker.</desc>
+  <rect width="1280" height="720" fill="#101923"/>
+  <path d="M0 90H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+  <path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+  <path d="M150 420 640 475 1130 420 1085 557 640 615 195 557Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+  <path d="M195 557 640 615 1085 557V605L640 667 195 605Z" fill="#1B2A3A"/>
+  <path d="M260 427 640 471M1020 427 640 471M390 444 640 473M890 444 640 473" fill="none" stroke="#496372" stroke-width="3"/>
+  <path d="M0 250H172V427H0ZM1108 210H1280V427H1108Z" fill="#26394A"/>
+  <path d="M0 250H172M1108 210H1280" stroke="#728896" stroke-width="4"/>
+  <rect x="548" y="285" width="184" height="116" rx="4" fill="#101923" stroke="#728896" stroke-width="5"/>
+  <path d="M575 312H705V369H575Z" fill="#1B2A3A"/>
+  <path d="M596 340H684" stroke="#496372" stroke-width="5"/>
+  <ellipse cx="640" cy="542" rx="28" ry="9" fill="#101923" opacity=".55"/>
+  <rect x="626" y="505" width="28" height="28" rx="4" fill="#63D5C8"/>
+  <path d="M640 494V475" stroke="#63D5C8" stroke-width="4"/>
+  <path d="M592 620H688" stroke="#728896" stroke-width="3" opacity=".65"/>
+</svg>
