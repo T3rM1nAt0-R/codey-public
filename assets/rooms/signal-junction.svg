@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Signal Junction</title>
+  <desc id="desc">A compact digital chamber with two broad passageways and a weak amber signal fragment on the central platform.</desc>
+  <rect width="1280" height="720" fill="#101923"/>
+  <path d="M0 78H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+  <path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+  <path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+  <path d="M96 720 550 502M1184 720 730 502M354 720 600 506M926 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+  <path d="M176 246H364V434H176ZM916 246H1104V434H916Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+  <path d="M176 246H364M916 246H1104" stroke="#A8B8C0" stroke-width="5"/>
+  <path d="M205 282H335V412H205ZM945 282H1075V412H945Z" fill="#101923"/>
+  <path d="M226 305H314M966 305H1054" stroke="#496372" stroke-width="5"/>
+  <path d="M458 422 640 442 822 422 796 520 640 540 484 520Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+  <path d="M484 520 640 540 796 520V550L640 574 484 550Z" fill="#1B2A3A"/>
+  <ellipse cx="640" cy="493" rx="42" ry="13" fill="#101923" opacity=".65"/>
+  <path d="M640 435 662 463 640 488 618 463Z" fill="#F2B84B" opacity=".88"/>
+  <path d="M640 444 650 463 640 476 630 463Z" fill="#F1F4F5" opacity=".78"/>
+  <path d="M614 490 640 501 666 490" fill="none" stroke="#F2B84B" stroke-width="3" opacity=".72"/>
+  <path d="M542 610H738" stroke="#728896" stroke-width="3" opacity=".65"/>
+</svg>

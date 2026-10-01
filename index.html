@@ -4,12 +4,34 @@
   <meta charset="UTF-8">
   <title>Codey</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="src/code-runner.css">
+  <link rel="stylesheet" href="src/save.css">
 </head>
 <body>
-  <div id="game"></div>
+  <div id="game">
+    <div id="status">
+      <div id="inventory-panel"></div>
+      <div id="map-panel"></div>
+      <div id="game-controls">
+        <button id="restart-button" type="button">Restart game</button>
+        <button id="recovery-button" type="button" hidden>Start a new game</button>
+        <span id="save-status" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+    <div id="main"></div>
+  </div>
   <script src="src/inventory.js"></script>
+  <script src="src/commands.js"></script>
+  <script src="src/act2-puzzles.js"></script>
+  <script src="content/items.js"></script>
   <script src="content/act1.js"></script>
+  <script src="content/act2.js"></script>
+  <script src="content/act3.js"></script>
   <script src="content/index.js"></script>
+  <script src="src/save.js"></script>
+  <script src="src/code-interpreter.js"></script>
+  <script src="src/code-runner.js"></script>
   <script src="src/engine.js"></script>
 </body>
 </html>
+

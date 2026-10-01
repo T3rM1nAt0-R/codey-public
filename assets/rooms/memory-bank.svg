@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Memory Bank</title>
+<desc id="desc">A named-value console sits centered in a quiet bank of storage columns, showing relayMode set to idle.</desc>
+<rect width="1280" height="720" fill="#101923"/>
+<path d="M0 72H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+<path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+<path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+<path d="M104 720 550 502M1176 720 730 502M340 720 600 506M940 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+<path d="M0 150H160M1120 150H1280M0 188H120M1160 188H1280" stroke="#728896" stroke-width="4" opacity=".7"/>
+<path d="M480 230H800V448H480Z" fill="#101923" stroke="#728896" stroke-width="7"/><path d="M508 258H772V420H508Z" fill="#26394A" stroke="#63D5C8" stroke-width="5"/><text x="640" y="315" text-anchor="middle" fill="#A8B8C0" font-size="28" font-family="system-ui,sans-serif">relayMode</text><path d="M548 338H732V398H548Z" fill="#101923"/><text x="640" y="379" text-anchor="middle" fill="#F2B84B" font-size="38" font-family="system-ui,sans-serif">idle</text><path d="M530 448H750L788 492H492Z" fill="#344B5A" stroke="#728896" stroke-width="5"/><path d="M406 270H444V430H406ZM836 270H874V430H836Z" fill="#26394A" stroke="#496372" stroke-width="5"/>
+</svg>

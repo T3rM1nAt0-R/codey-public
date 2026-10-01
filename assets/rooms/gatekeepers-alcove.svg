@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Gatekeeper's Alcove</title>
+<desc id="desc">A calm luminous Arbiter symbol sits at the center of a sheltered alcove, framed by layered stone-like system planes.</desc>
+<rect width="1280" height="720" fill="#101923"/>
+<path d="M0 72H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+<path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+<path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+<path d="M104 720 550 502M1176 720 730 502M340 720 600 506M940 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+<path d="M0 150H160M1120 150H1280M0 188H120M1160 188H1280" stroke="#728896" stroke-width="4" opacity=".7"/>
+<path d="M496 490 640 444 784 490 640 538Z" fill="#26394A" stroke="#728896" stroke-width="5"/><path d="M535 486 640 454 745 486 640 520Z" fill="#344B5A"/><path d="M640 270 710 334 692 420 640 455 588 420 570 334Z" fill="#26394A" stroke="#63D5C8" stroke-width="7"/><path d="M640 294 684 340 674 396 640 424 606 396 596 340Z" fill="#1B2A3A" stroke="#728896" stroke-width="5"/><ellipse cx="640" cy="360" rx="25" ry="34" fill="#F2B84B"/><circle cx="640" cy="360" r="11" fill="#F1F4F5"/><path d="M590 307 560 278M690 307 720 278" stroke="#63D5C8" stroke-width="6"/>
+</svg>

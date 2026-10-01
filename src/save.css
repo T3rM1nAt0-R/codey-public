@@ -1,0 +1,35 @@
+#game-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+#restart-button,
+#recovery-button {
+  border: 1px solid var(--line);
+  background: var(--wall);
+  color: var(--white);
+  font: inherit;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+}
+
+#restart-button:focus-visible,
+#recovery-button:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+#save-status {
+  flex: 1 1 14rem;
+  color: var(--active);
+  font-size: 0.9rem;
+}
+
+#recovery-button[hidden] {
+  display: none;
+}

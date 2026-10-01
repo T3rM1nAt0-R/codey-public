@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Process Hallway</title>
+<desc id="desc">A long corridor converges on a sealed listening gate at its centered far end.</desc>
+<rect width="1280" height="720" fill="#101923"/>
+<path d="M0 72H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+<path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+<path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+<path d="M104 720 550 502M1176 720 730 502M340 720 600 506M940 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+<path d="M0 150H160M1120 150H1280M0 188H120M1160 188H1280" stroke="#728896" stroke-width="4" opacity=".7"/>
+<path d="M500 188H780V446L640 478 500 446Z" fill="#101923" stroke="#728896" stroke-width="7"/><path d="M536 220H744V424L640 448 536 424Z" fill="#1B2A3A" stroke="#496372" stroke-width="6"/><path d="M560 250H720V408L640 426 560 408Z" fill="#26394A"/><path d="M610 298H670V378H610Z" fill="#101923" stroke="#F2B84B" stroke-width="5"/><path d="M620 316H660M620 338H660M620 360H660" stroke="#A8B8C0" stroke-width="5"/>
+</svg>

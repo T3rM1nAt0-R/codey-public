@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Annex</title>
+<desc id="desc">A narrow side passage leads directly to a sealed geometric door with a centered listening mark.</desc>
+<rect width="1280" height="720" fill="#101923"/>
+<path d="M0 72H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+<path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+<path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+<path d="M104 720 550 502M1176 720 730 502M340 720 600 506M940 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+<path d="M0 150H160M1120 150H1280M0 188H120M1160 188H1280" stroke="#728896" stroke-width="4" opacity=".7"/>
+<path d="M500 188H780V474H500Z" fill="#101923" stroke="#728896" stroke-width="7"/><path d="M532 220H748V454H532Z" fill="#26394A" stroke="#496372" stroke-width="5"/><path d="M566 250H714V438H566Z" fill="#1B2A3A" stroke="#728896" stroke-width="5"/><path d="M640 292 680 350 640 408 600 350Z" fill="#344B5A" stroke="#F2B84B" stroke-width="6"/><circle cx="640" cy="350" r="14" fill="#63D5C8"/><path d="M600 432H680" stroke="#A8B8C0" stroke-width="5"/>
+</svg>

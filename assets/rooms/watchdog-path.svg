@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Watchdog’s Path room comp</title>
+  <desc id="desc">A long geometric corridor narrows toward a doorway while one amber scan plane crosses the floor.</desc>
+  <rect width="1280" height="720" fill="#101923"/>
+  <path d="M0 0H1280V450L842 390H438L0 450Z" fill="#1B2A3A"/>
+  <path d="M0 0 438 390V450L0 720ZM1280 0 842 390V450L1280 720Z" fill="#26394A"/>
+  <path d="M0 720 438 450H842L1280 720Z" fill="#344B5A"/>
+  <path d="M0 520 480 416H800L1280 520V558L800 452H480L0 558Z" fill="#F2B84B" opacity=".78"/>
+  <path d="M0 520 480 416M1280 520 800 416" stroke="#F1F4F5" stroke-width="3" opacity=".75"/>
+  <path d="M0 612 500 453M1280 612 780 453M240 720 540 453M1040 720 740 453" stroke="#496372" stroke-width="3"/>
+  <rect x="554" y="266" width="172" height="124" fill="#101923" stroke="#728896" stroke-width="5"/>
+  <path d="M580 292H700V390H580Z" fill="#1B2A3A"/>
+  <rect x="114" y="215" width="104" height="128" fill="#344B5A" stroke="#728896" stroke-width="4"/>
+  <rect x="1062" y="215" width="104" height="128" fill="#344B5A" stroke="#728896" stroke-width="4"/>
+  <path d="M114 215H218M1062 215H1166" stroke="#A8B8C0" stroke-width="4"/>
+  <ellipse cx="640" cy="587" rx="25" ry="8" fill="#101923" opacity=".55"/>
+  <rect x="627" y="551" width="26" height="26" rx="3" fill="#63D5C8"/>
+</svg>

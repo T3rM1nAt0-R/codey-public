@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+<title id="title">Warden Crossing</title>
+<desc id="desc">A composed geometric Warden stands at the center of an open crossing, with its scanning light held behind it rather than aimed as a weapon.</desc>
+<rect width="1280" height="720" fill="#101923"/>
+<path d="M0 72H1280V426L640 500 0 426Z" fill="#1B2A3A"/>
+<path d="M0 427 640 500 1280 427V720H0Z" fill="#344B5A"/>
+<path d="M0 430 208 350 398 452 250 508 0 474ZM1280 430 1072 350 882 452 1030 508 1280 474Z" fill="#26394A" stroke="#728896" stroke-width="4"/>
+<path d="M104 720 550 502M1176 720 730 502M340 720 600 506M940 720 680 506" fill="none" stroke="#496372" stroke-width="4"/>
+<path d="M0 150H160M1120 150H1280M0 188H120M1160 188H1280" stroke="#728896" stroke-width="4" opacity=".7"/>
+<path d="M520 250H760V470H520Z" fill="#63D5C8" opacity=".12"/><path d="M520 250H760V470H520Z" fill="none" stroke="#63D5C8" stroke-width="5"/><path d="M640 246 704 300 690 414 640 456 590 414 576 300Z" fill="#26394A" stroke="#A8B8C0" stroke-width="7"/><path d="M640 278 678 314 670 380 640 410 610 380 602 314Z" fill="#1B2A3A" stroke="#728896" stroke-width="5"/><path d="M614 332H666" stroke="#F2B84B" stroke-width="8"/><circle cx="640" cy="332" r="12" fill="#F1F4F5"/><path d="M550 466H730L770 506H510Z" fill="#344B5A" stroke="#728896" stroke-width="5"/>
+</svg>
