@@ -1,15 +1,17 @@
-/* Scoped scene-stage styles; layout below the stage belongs to the game shell. */
+/* Scene filters target the image node only. Hotspots and controls are siblings. */
+.scene-presentation {
+  width: min(100%, 110svh);
+  margin: 0 auto 1em;
+}
 .room-stage {
   position: sticky;
   top: 0;
   z-index: 3;
-  width: min(100%, 110svh);
+  width: 100%;
   aspect-ratio: 16 / 9;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0 auto;
   overflow: hidden;
   isolation: isolate;
-  margin: 0 auto 1em;
   background: #101923;
 }
 
@@ -21,6 +23,15 @@
   height: 100%;
   object-fit: cover;
   user-select: none;
+}
+.room-stage__image[data-scene-treatment="warm"] {
+  filter: sepia(0.24) saturate(1.16) brightness(1.02);
+}
+.room-stage__image[data-scene-treatment="cool"] {
+  filter: sepia(0.12) hue-rotate(165deg) saturate(0.78) brightness(1.02);
+}
+.room-stage__image[data-scene-treatment="high-contrast"] {
+  filter: contrast(1.5) saturate(1.06);
 }
 
 .room-hotspot {
@@ -36,7 +47,6 @@
   cursor: pointer;
   touch-action: manipulation;
 }
-
 .room-hotspot::after {
   width: 14px;
   height: 14px;
@@ -45,24 +55,105 @@
   background: #101923;
   content: "";
 }
-
-.room-hotspot:hover {
-  background: rgba(242, 184, 75, 0.28);
-}
-
+.room-hotspot:hover { background: rgba(242, 184, 75, 0.28); }
 .room-hotspot:focus-visible {
   outline: 3px solid #f1f4f5;
   outline-offset: 3px;
   background: rgba(242, 184, 75, 0.36);
 }
 
+.scene-treatment-disclosure {
+  margin-top: 0.45rem;
+  color: #f1f4f5;
+  font: 0.9rem/1.4 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.scene-treatment-disclosure > summary {
+  width: fit-content;
+  min-height: 2.5rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #728896;
+  border-radius: 0.3rem;
+  background: #1b2a3a;
+  color: #f1f4f5;
+  cursor: pointer;
+}
+.scene-treatment-disclosure > summary:focus-visible {
+  outline: 3px solid #63d5c8;
+  outline-offset: 2px;
+}
+.scene-treatment-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  min-width: 0;
+  margin: 0.55rem 0 0;
+  padding: 0.45rem 0.65rem 0.55rem;
+  border: 1px solid #728896;
+  border-radius: 0.35rem;
+  background: #1b2a3a;
+  color: #f1f4f5;
+  font: inherit;
+}
+.scene-treatment-controls legend {
+  padding: 0 0.25rem;
+  color: #f1f4f5;
+  font-weight: 650;
+}
+.scene-treatment-controls__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+}
+.scene-treatment-controls__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.45rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+.scene-treatment-controls__option input { accent-color: #63d5c8; }
+.scene-treatment-controls__option:focus-within,
+.scene-treatment-controls__reset:focus-visible {
+  outline: 3px solid #63d5c8;
+  outline-offset: 2px;
+}
+.scene-treatment-controls__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+.scene-treatment-controls__reset {
+  min-height: 2.75rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #a8b8c0;
+  border-radius: 0.25rem;
+  background: #26394a;
+  color: #f1f4f5;
+  font: inherit;
+  cursor: pointer;
+}
+.scene-treatment-controls__reset:disabled {
+  opacity: 0.72;
+  cursor: default;
+}
+.scene-treatment-controls__status {
+  flex-basis: 100%;
+  color: #dce4e8;
+}
+
 @media (max-width: 640px) {
+  .scene-presentation { width: 100%; }
   .room-stage {
-    width: 100%;
     height: min(45svh, 34rem);
     aspect-ratio: auto;
   }
   .room-hotspot { min-width: 44px; min-height: 44px; }
+  .scene-treatment-controls__actions { margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .room-hotspot { transition: none; }

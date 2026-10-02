@@ -17,9 +17,16 @@
   const rooms = window.Codey.rooms;
   const items = window.Codey.items;
   const startRoomId = window.Codey.startRoomId;
-  const inventory = window.Codey.inventory;
   const commands = window.Codey.commands;
   const act2Puzzles = window.Codey.act2Puzzles;
+  const act2MechanicId = 'codey.act2-puzzles';
+  const codeMechanicId = window.Codey.codePuzzle.MECHANIC_ID;
+  const mechanics = {
+    [act2MechanicId]: { version: 1, reduce: act2Puzzles.reduce },
+    [codeMechanicId]: window.Codey.codePuzzle.createRegistration(window.Codey.interpreter),
+  };
+  const runtimeApi = window.CodeyRuntime || globalThis.CodeyRuntime;
+  const runtime = runtimeApi.createRuntime(window.Codey.runtimeContent, { mechanics });
   const saveApi = window.Codey.save;
   let storage = null;
   try {
@@ -27,28 +34,38 @@
   } catch (_error) {
     storage = null;
   }
-  const saveContext = { rooms, items, startRoomId };
+  const saveContext = {
+    rooms, items, startRoomId, runtime,
+    mechanicIds: Object.keys(mechanics),
+    flags: window.Codey.flags,
+  };
   const loadedSave = saveApi ? saveApi.load(storage, saveContext) : { status: 'unavailable' };
-  const restored = loadedSave.status === 'valid' ? loadedSave.state : null;
+  const restored = loadedSave.status === 'valid' ? loadedSave : null;
   let saveBlocked = !saveApi || !storage || ['corrupt', 'incompatible', 'unavailable'].includes(loadedSave.status);
 
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const FALLBACK_ICON = '<circle cx="12" cy="12" r="5" fill="currentColor"/>';
 
-  const state = {
-    currentRoomId: restored ? restored.currentRoomId : startRoomId,
-    inventory: restored ? restored.inventory : inventory.create(),
-    // Story flags: "has this happened yet," not "what am I carrying."
-    // Same create/has/add functions as inventory - see src/inventory.js.
-    flags: restored ? restored.flags : inventory.create(),
-    puzzleState: restored ? restored.puzzleState : act2Puzzles.createState(),
-    // The map only ever shows places the player has actually reached -
-    // no spoilers for unexplored rooms. See trackVisit() below for how
-    // a room opts in via `mapName`.
-    visited: restored ? restored.visited : [],
-    currentMapRoomId: restored ? restored.currentMapRoomId : null,
-    codeRunner: restored ? restored.codeRunner : null,
+  let runtimeState = restored ? restored.runtimeState : runtime.start().state;
+  let adapterState = restored ? restored.adapterState : {
+    map: { visited: [], currentRoomId: null },
+    codeDraft: null,
   };
+  const state = {
+    get currentRoomId() { return runtimeState.currentRoomId; },
+    get inventory() { return runtimeState.inventory; },
+    get flags() { return runtimeState.flags; },
+    get visited() { return adapterState.map.visited; },
+    get currentMapRoomId() { return adapterState.map.currentRoomId; },
+    get codeRunner() { return adapterState.codeDraft; },
+    set codeRunner(value) { adapterState.codeDraft = value; },
+  };
+
+  function dispatch(action) {
+    const transition = runtime.dispatch(runtimeState, action);
+    if (transition.result.status === 'accepted') runtimeState = transition.state;
+    return transition;
+  }
 
   let logEl = null;
   let activeScene = null;
@@ -78,7 +95,7 @@
 
   function saveGame() {
     if (saveBlocked || !saveApi || !storage) return false;
-    const result = saveApi.write(storage, state, saveContext);
+    const result = saveApi.write(storage, runtimeState, adapterState, saveContext);
     if (!result.ok) {
       if (result.reason === 'invalid-state') setSaveStatus('Progress could not be saved because its state is invalid.');
       else setSaveStatus('Local save storage is unavailable in this browser.');
@@ -89,13 +106,8 @@
   }
 
   function resetProgress() {
-    state.currentRoomId = startRoomId;
-    state.inventory = inventory.create();
-    state.flags = inventory.create();
-    state.puzzleState = act2Puzzles.createState();
-    state.visited = [];
-    state.currentMapRoomId = null;
-    state.codeRunner = null;
+    runtimeState = runtime.start().state;
+    adapterState = { map: { visited: [], currentRoomId: null }, codeDraft: null };
     activeScene = null;
     logEl = null;
     commandHistory = [];
@@ -118,17 +130,18 @@
 
   function visibleChoices(room) {
     return room.choices.filter((choice) => {
-      if (choice.requires && !inventory.has(state.inventory, choice.requires)) return false;
+      const requiredItems = choice.requires == null ? [] : (Array.isArray(choice.requires) ? choice.requires : [choice.requires]);
+      if (!requiredItems.every((id) => state.inventory.includes(id))) return false;
       const requiredFlags = [
         ...(choice.requiresFlag ? [choice.requiresFlag] : []),
         ...(choice.requiresFlags || []),
       ];
-      return requiredFlags.every((flag) => inventory.has(state.flags, flag));
+      return requiredFlags.every((flag) => state.flags.includes(flag));
     });
   }
 
   function itemsHere(room) {
-    return (room.items || []).filter((itemId) => !inventory.has(state.inventory, itemId));
+    return (room.items || []).filter((itemId) => !state.inventory.includes(itemId));
   }
 
   function describeRoom(room) {
@@ -147,9 +160,9 @@
   function trackVisit(roomId) {
     const room = rooms[roomId];
     if (!room.mapName) return;
-    state.currentMapRoomId = roomId;
-    if (!state.visited.includes(roomId)) {
-      state.visited.push(roomId);
+    adapterState.map.currentRoomId = roomId;
+    if (!adapterState.map.visited.includes(roomId)) {
+      adapterState.map.visited.push(roomId);
     }
   }
 
@@ -315,8 +328,8 @@
 
   function activateChoice(room, choice) {
     if (!visibleChoices(room).includes(choice)) return;
-    if (choice.item) inventory.add(state.inventory, choice.item);
-    state.currentRoomId = choice.next;
+    const transition = dispatch({ type: 'choose', choiceId: choice.id });
+    if (transition.result.status !== 'accepted') return;
     render();
   }
 
@@ -384,10 +397,11 @@
   }
 
   function moveTo(roomId) {
-    state.currentRoomId = roomId;
+    if (state.currentRoomId !== roomId) return false;
     trackVisit(roomId);
     renderStatus();
     appendLogLine(describeRoom(rooms[roomId]));
+    return true;
   }
 
   function handleGo(argument) {
@@ -398,59 +412,58 @@
       return;
     }
 
-    const missingItem = exit.requires && !inventory.has(state.inventory, exit.requires);
-    const missingFlag = exit.requiresFlag && !inventory.has(state.flags, exit.requiresFlag);
-    if (missingItem || missingFlag) {
-      if (exit.onFail) {
-        appendLogLine(exit.onFail.text);
-        if (exit.onFail.to) {
-          moveTo(exit.onFail.to);
-        }
-      } else {
-        appendLogLine("That way is blocked. Something is missing.");
-      }
+    const transition = dispatch({ type: 'exit', direction: argument });
+    if (transition.result.status !== 'accepted') {
+      appendLogLine(exit.onFail && exit.onFail.text || "That way is blocked. Something is missing.");
       return;
     }
-
-    moveTo(exit.to);
+    if (transition.result.code === 'exit-failed-forward' && exit.onFail) appendLogLine(exit.onFail.text);
+    moveTo(state.currentRoomId);
   }
 
   function handleHide() {
     const room = rooms[state.currentRoomId];
-    if (!room.hideFlag) {
-      appendLogLine("No reason to hide in this room.");
-      return;
-    }
-    if (inventory.has(state.flags, room.hideFlag)) {
-      appendLogLine("You're already still, already waiting.");
-      return;
-    }
-    inventory.add(state.flags, room.hideFlag);
-    appendLogLine(room.hideText || 'You go still.');
+    applyPuzzleResult(room, { verb: 'hide' }, dispatch({
+      type: 'mechanic', mechanicId: act2MechanicId, payload: { verb: 'hide' },
+    }));
   }
 
-  function applyPuzzleResult(result) {
-    if (result.flag) inventory.add(state.flags, result.flag);
-    appendLogLine(result.text);
+  function applyPuzzleResult(room, payload, transition) {
+    if (transition.result.status !== 'accepted') {
+      appendLogLine('The interaction could not be completed.');
+      return;
+    }
+    appendLogLine(act2Puzzles.formatResult(room, payload, transition.result));
   }
 
   function handleInspect(argument) {
-    applyPuzzleResult(act2Puzzles.inspect(state.currentRoomId, rooms[state.currentRoomId], argument, state.puzzleState));
+    const room = rooms[state.currentRoomId];
+    const payload = { verb: 'inspect', argument };
+    applyPuzzleResult(room, payload, dispatch({ type: 'mechanic', mechanicId: act2MechanicId, payload }));
   }
 
   function handleOrder(argument) {
-    applyPuzzleResult(act2Puzzles.sequence(state.currentRoomId, rooms[state.currentRoomId], argument, state.puzzleState, new Set(state.flags)));
+    const room = rooms[state.currentRoomId];
+    const payload = { verb: 'order', argument };
+    applyPuzzleResult(room, payload, dispatch({ type: 'mechanic', mechanicId: act2MechanicId, payload }));
   }
 
   function handleSet(argument) {
-    applyPuzzleResult(act2Puzzles.setValue(state.currentRoomId, rooms[state.currentRoomId], argument, state.puzzleState));
+    const room = rooms[state.currentRoomId];
+    const payload = { verb: 'set', argument };
+    applyPuzzleResult(room, payload, dispatch({ type: 'mechanic', mechanicId: act2MechanicId, payload }));
   }
 
   function handleApproach(argument) {
-    const result = act2Puzzles.approach(rooms[state.currentRoomId], argument);
-    if (result.flag) inventory.add(state.flags, result.flag);
-    appendLogLine(result.text);
-    if (result.to) moveTo(result.to);
+    const room = rooms[state.currentRoomId];
+    const payload = { verb: 'approach', argument };
+    const transition = dispatch({ type: 'mechanic', mechanicId: act2MechanicId, payload });
+    applyPuzzleResult(room, payload, transition);
+    const direction = transition.result.data && transition.result.data.exitDirection;
+    if (transition.result.status === 'accepted' && transition.result.code === 'approach-selected' && direction) {
+      const route = dispatch({ type: 'exit', direction });
+      if (route.result.status === 'accepted') moveTo(state.currentRoomId);
+    }
   }
 
   function handleTake(argument) {
@@ -460,7 +473,11 @@
       appendLogLine(`There's no "${argument}" here to take.`);
       return;
     }
-    inventory.add(state.inventory, itemId);
+    const transition = dispatch({ type: 'take', itemId });
+    if (transition.result.status !== 'accepted') {
+      appendLogLine(`There's no "${argument}" here to take.`);
+      return;
+    }
     renderStatus();
     appendLogLine(`You take the ${items[itemId].name}.`);
   }
@@ -542,12 +559,16 @@
       ? state.codeRunner
       : null;
     if (!initialRunnerState) state.codeRunner = null;
-    window.Codey.codeRunner.mount(main, config, () => {
-      if (config.successFlag) inventory.add(state.flags, config.successFlag);
+    window.Codey.codeRunner.mount(main, config, (evaluation) => {
+      const solved = dispatch({
+        type: 'mechanic',
+        mechanicId: codeMechanicId,
+        payload: { evaluation },
+      });
+      if (solved.result.status !== 'accepted' || solved.result.code !== 'code-goal-met') return;
       state.codeRunner = null;
-      const nextRoomId = config.next;
-      if (nextRoomId && rooms[nextRoomId]) {
-        state.currentRoomId = nextRoomId;
+      const route = dispatch({ type: 'exit', direction: 'complete' });
+      if (route.result.status === 'accepted') {
         render();
         focusRoomEntry();
       } else {
@@ -556,7 +577,7 @@
     }, {
       initialState: initialRunnerState,
       onStateChange: (runnerState) => {
-        state.codeRunner = Object.assign({ roomId: state.currentRoomId }, runnerState);
+        adapterState.codeDraft = Object.assign({ roomId: state.currentRoomId }, runnerState);
         saveGame();
       },
     });
@@ -565,6 +586,8 @@
   function renderCommandRoom(room) {
     const main = document.getElementById('main');
     main.innerHTML = '';
+
+    appendSceneStage(main, room, false);
 
     const log = document.createElement('div');
     log.id = 'log';
