@@ -1,0 +1,168 @@
+/* Fixed-viewport composition for the playable frame. The stage keeps its authored 16:9 ratio;
+   overflow stays inside the game shell so browser/page scrolling cannot move the frame away. */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  height: 100vh;
+  height: 100dvh;
+  padding: clamp(0.25rem, 1vh, 0.75rem) clamp(0.35rem, 1vw, 1rem);
+}
+
+#game {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(0.25rem, 0.8vh, 0.65rem);
+  width: min(100%, 76rem);
+  height: 100%;
+  min-height: 0;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#status {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) minmax(0, 2fr) auto;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+  width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 0.45rem 0.65rem;
+  overflow: hidden;
+}
+
+#status > * { min-width: 0; }
+#status .panel-heading { margin-bottom: 0.1rem; }
+#inventory-panel .inventory-list { gap: 0.2rem 0.6rem; }
+
+#map-panel {
+  min-width: 0;
+  overflow: hidden;
+}
+#map-panel .map-svg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+#game-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  min-width: 0;
+  font-size: 0.82rem;
+}
+#game-controls button {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.55rem;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) var(--void);
+}
+
+.scene-presentation {
+  flex: 0 0 auto;
+  width: min(100%, 110dvh);
+  max-width: 100%;
+  margin: 0 auto clamp(0.35rem, 1vh, 0.8rem);
+}
+.room-stage {
+  position: relative;
+  top: auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+.room-stage__image { object-fit: cover; }
+
+#story,
+#choices,
+#log,
+#command-form {
+  width: min(100%, 58rem);
+  max-width: 100%;
+}
+#story { flex: 0 0 auto; }
+#choices {
+  flex: 0 0 auto;
+  margin-top: clamp(0.4rem, 1vh, 0.9rem);
+}
+#choices button { min-height: 2.65rem; }
+#log {
+  flex: 1 1 auto;
+  min-height: 4rem;
+  max-height: none;
+  overflow: auto;
+}
+#command-form {
+  flex: 0 0 auto;
+  margin: 0.45rem auto 0.25rem;
+}
+
+@media (max-width: 640px) {
+  body { padding: 0.25rem; }
+  #game { gap: 0.25rem; }
+  #status {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: 0.2rem 0.45rem;
+    padding: 0.3rem 0.45rem;
+    font-size: 0.78rem;
+  }
+  #game-controls {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    font-size: 0.72rem;
+  }
+  #game-controls button {
+    min-height: 2rem;
+    padding: 0.25rem 0.45rem;
+  }
+  .status-panels {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 0.35rem;
+    padding: 0 0.45rem 0.4rem;
+  }
+  .scene-presentation {
+    width: min(100%, 110dvh);
+  }
+  .room-stage {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  #choices { grid-template-columns: 1fr; gap: 0.35rem; }
+  #choices button { min-height: 2.5rem; padding: 0.5rem 0.65rem; }
+}
+
+@media (max-height: 600px) {
+  body { padding-block: 0.2rem; }
+  #game { gap: 0.2rem; }
+  #status { padding-block: 0.2rem; }
+  .scene-presentation { margin-bottom: 0.25rem; }
+  #story p { font-size: 0.95rem; line-height: 1.35; }
+  #choices { margin-top: 0.3rem; gap: 0.25rem; }
+  #choices button { min-height: 2.25rem; padding-block: 0.35rem; }
+  #command-form { margin-top: 0.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main { scroll-behavior: auto; }
+}
