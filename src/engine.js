@@ -310,6 +310,23 @@
     }
   }
 
+  function refreshCommandScene(room) {
+    const main = document.getElementById('main');
+    const previous = main.querySelector('.scene-presentation');
+    renderCurrentScene(room);
+
+    const next = activeScene && window.Codey.sceneRenderer
+      ? window.Codey.sceneRenderer.render(Object.assign({}, activeScene, { hotspots: [] }), null)
+      : null;
+
+    if (previous) {
+      if (next) previous.replaceWith(next);
+      else previous.remove();
+    } else if (next) {
+      main.insertBefore(next, main.firstChild);
+    }
+  }
+
   function appendSceneStage(main, room, interactive) {
     if (!activeScene || !window.Codey.sceneRenderer) return;
 
@@ -398,9 +415,15 @@
 
   function moveTo(roomId) {
     if (state.currentRoomId !== roomId) return false;
+    const room = rooms[roomId];
+    if (room.mode !== 'command') {
+      render();
+      return true;
+    }
+    refreshCommandScene(room);
     trackVisit(roomId);
     renderStatus();
-    appendLogLine(describeRoom(rooms[roomId]));
+    appendLogLine(describeRoom(room));
     return true;
   }
 
